@@ -3,22 +3,22 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Clave secreta (en producción, mejor usar variable de entorno)
+# SECRET_KEY: en producción, usa variable de entorno para mayor seguridad
 SECRET_KEY = 'django-insecure-cty$!4kv1f!j9c_korxl_^fymsrdw22q3+-4wuhq7(=metcry_'
 
-# Desactivar debug en producción
+# DEBUG desactivado para producción
 DEBUG = False
 
 # Hosts permitidos para evitar error 400 Bad Request
 ALLOWED_HOSTS = [
-    'tu-dominio.render.com',  # Cambia esto por tu dominio real en Render
+    'hojadevida-zyhj.onrender.com',  # Cambia por tu dominio en Render
     'localhost',
     '127.0.0.1',
 ]
 
-# Para Django 4.x y HTTPS en dominios personalizados, evita errores CSRF
+# Para Django 4.x y HTTPS en dominios personalizados
 CSRF_TRUSTED_ORIGINS = [
-    'https://tu-dominio.render.com',  # Debe incluir https:// y tu dominio
+    'https://hojadevida-zyhj.onrender.com',
 ]
 
 INSTALLED_APPS = [
@@ -80,6 +80,7 @@ TIME_ZONE = 'America/Guayaquil'
 USE_I18N = True
 USE_TZ = True
 
+# Configuración de archivos estáticos
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -89,6 +90,7 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Configuración de archivos media (subidos por usuarios)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
