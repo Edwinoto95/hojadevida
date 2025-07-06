@@ -10,15 +10,17 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-cty$!4kv1f!j9c_korxl_^fyms
 DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 't')
 
 # Hosts permitidos
-if DEBUG:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-else:
-    ALLOWED_HOSTS = ['hojadevida-zyhj.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+# Agrega automáticamente el hostname de Render si existe
+render_hostname = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if render_hostname:
+    ALLOWED_HOSTS.append(render_hostname)
 
 # CSRF trusted origins solo en producción con HTTPS
 CSRF_TRUSTED_ORIGINS = []
-if not DEBUG:
-    CSRF_TRUSTED_ORIGINS = ['https://hojadevida-zyhj.onrender.com']
+if not DEBUG and render_hostname:
+    CSRF_TRUSTED_ORIGINS = [f'https://{render_hostname}']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
