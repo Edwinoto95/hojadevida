@@ -3,20 +3,20 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECRET_KEY: en producción, usa variable de entorno para mayor seguridad
-SECRET_KEY = 'django-insecure-cty$!4kv1f!j9c_korxl_^fymsrdw22q3+-4wuhq7(=metcry_'
+# SECRET_KEY: en producción, es recomendable cargarla desde variable de entorno
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-cty$!4kv1f!j9c_korxl_^fymsrdw22q3+-4wuhq7(=metcry_')
 
-# DEBUG desactivado para producción
+# DEBUG debe estar en False en producción para seguridad
 DEBUG = False
 
 # Hosts permitidos para evitar error 400 Bad Request
 ALLOWED_HOSTS = [
-    'hojadevida-zyhj.onrender.com',  # Cambia por tu dominio en Render
+    'hojadevida-zyhj.onrender.com',  # Cambia por tu dominio real en Render
     'localhost',
     '127.0.0.1',
 ]
 
-# Para Django 4.x y HTTPS en dominios personalizados
+# Para Django 4.x y HTTPS en dominios personalizados, evita errores CSRF
 CSRF_TRUSTED_ORIGINS = [
     'https://hojadevida-zyhj.onrender.com',
 ]
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise para servir estáticos en producción
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -46,7 +47,7 @@ ROOT_URLCONF = 'Hoja.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],  # Carpeta para plantillas
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,11 +85,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-    BASE_DIR / 'Hoja' / 'static',
+    BASE_DIR / 'static',            # Carpeta estática raíz (donde está plantilla)
+    BASE_DIR / 'Hoja' / 'static',  # Carpeta estática adicional
 ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Carpeta donde collectstatic recopila los archivos
+
+# Usar WhiteNoise para servir estáticos con compresión y cacheo
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Configuración de archivos media (subidos por usuarios)
 MEDIA_URL = '/media/'
