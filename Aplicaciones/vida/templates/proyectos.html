@@ -1,0 +1,69 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+
+{% block title %}Proyectos Destacados{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="mb-5">Proyectos Destacados</h1>
+
+  <p class="mb-4 fst-italic">
+    Nota: Los proyectos están alojados en hosting gratuito (Render), por lo que la primera carga puede tardar entre 30 y 50 segundos debido a la activación del servidor.
+  </p>
+
+  <p class="mb-5">
+    Puede consultar todos mis repositorios en GitHub: 
+    <a href="https://github.com/Edwinoto95?tab=repositories" target="_blank" rel="noopener noreferrer">
+      https://github.com/Edwinoto95?tab=repositories
+    </a>
+  </p>
+
+  <div class="project-item mb-5 p-4 border rounded shadow-sm">
+    <h3 class="text-primary">Cocina</h3>
+    <p><strong>Tecnologías usadas:</strong> Django, SQLite</p>
+    <p>
+      Desarrollo de una aplicación web para la gestión y visualización de recetas culinarias, con funcionalidades para agregar, editar y buscar platos. Proyecto orientado a la práctica de desarrollo web full stack con énfasis en bases de datos ligeras.
+    </p>
+    <a href="https://cocina-3.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn btn-success">
+      Visitar Proyecto
+    </a>
+  </div>
+
+  <div class="project-item mb-5 p-4 border rounded shadow-sm">
+    <h3 class="text-primary">Cine</h3>
+    <p><strong>Tecnologías usadas:</strong> Node.js</p>
+    <p>
+      Plataforma web desarrollada con Node.js para la consulta de películas, que incluye funcionalidades interactivas y diseño responsivo. Proyecto enfocado en el manejo de servidores y rutas dinámicas.
+    </p>
+    <a href="https://cinenodejs.onrender.com/index.html" target="_blank" rel="noopener noreferrer" class="btn btn-success">
+      Visitar Proyecto
+    </a>
+  </div>
+
+  <div class="project-item mb-5 p-4 border rounded shadow-sm">
+    <h3 class="text-primary">Arquitectura</h3>
+    <p><strong>Tecnologías usadas:</strong> Django, SQLite</p>
+    <p>
+      Proyecto web para la presentación de portafolios y proyectos arquitectónicos. Incluye sistema de autenticación con usuario y contraseña para administración de contenidos.
+    </p>
+    <p><strong>Usuario:</strong> admin | <strong>Contraseña:</strong> admin123</p>
+    <a href="https://arquitectura-proyecto1.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn btn-success">
+      Visitar Proyecto
+    </a>
+  </div>
+
+  <div class="project-item mb-5 p-4 border rounded shadow-sm">
+    <h3 class="text-primary">Sistema de Mensajes Masivos para Socios del GAD Parroquial Tanicuchi</h3>
+    <p><strong>Tecnologías usadas:</strong> Django, SQLite</p>
+    <p>
+      Desarrollo de una plataforma para el envío masivo de mensajes a socios, mejorando la comunicación institucional. Incluye sistema de autenticación para usuarios autorizados.
+    </p>
+    <p><strong>Usuario:</strong> gadtanicuchi | <strong>Contraseña:</strong> Tan&cuch&2025</p>
+    <a href="https://gad-tanichuchi.onrender.com/login" target="_blank" rel="noopener noreferrer" class="btn btn-success">
+      Visitar Proyecto
+    </a>
+  </div>
+
+ 
+</div>
+{% endblock %}

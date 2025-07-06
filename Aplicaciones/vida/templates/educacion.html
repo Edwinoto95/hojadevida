@@ -1,0 +1,47 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+
+{% block title %}Educación y Certificaciones{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="mb-5">Formación Académica y Certificaciones</h1>
+
+  <!-- Formación Académica -->
+  <div class="education-item mb-5 p-4 border rounded shadow-sm">
+    <h3>Ingeniería en Sistemas de Información</h3>
+    <h5 class="text-primary">Universidad Técnica de Cotopaxi</h5>
+   
+    <p>
+      Formación integral en análisis, diseño y desarrollo de sistemas de información. Adquisición de competencias en programación, bases de datos, redes y gestión de proyectos tecnológicos. Participación en proyectos académicos y prácticas profesionales orientadas a soluciones empresariales y municipales.
+    </p>
+  </div>
+
+  <div class="education-item mb-5 p-4 border rounded shadow-sm">
+    <h3>Segundo Nivel, Educación General Básica Unificada</h3>
+    <h5 class="text-primary">Unidad Educativa Saquisilí</h5>
+    
+    <p>
+      Estudios básicos con énfasis en ciencias naturales, matemáticas y comunicación. Desarrollo de habilidades analíticas y pensamiento crítico, base fundamental para la formación superior.
+    </p>
+  </div>
+
+  <div class="education-item mb-5 p-4 border rounded shadow-sm">
+    <h3>Primer Nivel, Educación General Básica</h3>
+    <h5 class="text-primary">Unidad Educativa Mariscal Antonio José de Sucre</h5>
+   
+    <p>
+      Formación inicial en áreas básicas del conocimiento, fomentando valores, disciplina y hábitos de estudio que contribuyeron al desarrollo personal y académico.
+    </p>
+  </div>
+
+  <!-- Certificaciones -->
+  <div class="education-item mb-5 p-4 border rounded shadow-sm">
+    <h3>Certificaciones</h3>
+    <ul>
+      <li><strong>Certificado Cisco Networking Academy:</strong> Completé con excelencia cursos de redes y seguridad informática, obteniendo una calificación superior al 75% en los exámenes finales.</li>
+      <li><strong>Certificado de Participación en Concurso de Programación:</strong> Representé a la Universidad Técnica de Cotopaxi en competencias interuniversitarias, demostrando habilidades avanzadas en algoritmos y resolución de problemas.</li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

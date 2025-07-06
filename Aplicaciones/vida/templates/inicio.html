@@ -1,0 +1,55 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+
+{% block content %}
+<div class="cv-container">
+    
+   <section id="hero" class="hero section dark-background">
+      <img src="{% static 'plantilla/assets/img/logo2.png' %}" alt="" data-aos="fade-in">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-4" style="margin-top: -50px;">
+            <!-- Foto de perfil circular -->
+            <div class="profile-photo" style="width: 120px; height: 120px; margin: 0 auto 10px; border-radius: 50%; overflow: hidden; border: 4px solid white; background: #ecf0f1; display: flex; align-items: center; justify-content: center; position: relative;" data-aos="fade-up">
+                <img src="/media/fotos/yo.jpg" alt="Foto de Edwin Danilo Oto Toapanta" style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%; position: absolute; top: 0; left: 0;">
+            </div>
+            
+            <!-- Nombre -->
+            <h1 data-aos="fade-up" data-aos-delay="100" style="white-space: normal; word-wrap: break-word; font-weight: 600; text-align: center; font-size: 2.2em; letter-spacing: 0.5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); margin-bottom: 15px; line-height: 1.2;">
+              Edwin Danilo Oto Toapanta
+            </h1>
+            
+            <!-- Descripción -->
+            <blockquote data-aos="fade-up" data-aos-delay="200" style="text-align: center; border: none; padding: 0; margin: 0 0 20px 0;">
+              <p style="font-size: 1.1em; line-height: 1.6; color: rgba(255,255,255,0.9); font-weight: 300; letter-spacing: 0.3px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">Ingeniero en Sistemas de Información con experiencia en desarrollo web, especializado en la creación de aplicaciones modernas y eficientes para la gestión empresarial y municipal.</p>
+            </blockquote>
+            
+            <!-- Información de contacto -->
+            <div class="contact-info" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.9em; margin-bottom: 25px; font-family: 'Arial', sans-serif;" data-aos="fade-up" data-aos-delay="250">
+                <div class="contact-item" style="display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.95); font-weight: 400; letter-spacing: 0.2px;">
+                    <i class="fas fa-map-marker-alt" style="width: 16px; text-align: center; color: #3498db;"></i>
+                    <span style="font-size: 0.85em;">Latacunga, Ecuador</span>
+                </div>
+                <div class="contact-item" style="display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.95); font-weight: 400; letter-spacing: 0.2px;">
+                    <i class="fas fa-phone" style="width: 16px; text-align: center; color: #3498db;"></i>
+                    <span style="font-size: 0.85em;">0984214393</span>
+                </div>
+                <div class="contact-item" style="display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.95); font-weight: 400; letter-spacing: 0.2px;">
+                    <i class="fas fa-envelope" style="width: 16px; text-align: center; color: #3498db;"></i>
+                    <span style="font-size: 0.85em;">edwin.oto8669@utc.edu.ec</span>
+                </div>
+            </div>
+            
+            <!-- Botón de descarga -->
+            <div class="d-flex flex-column align-items-center" data-aos="fade-up" data-aos-delay="300" style="gap: 12px;">
+              <a href="{% url 'vida:descargar_pdf_estatico' %}" class="btn btn-success" style="padding: 14px 35px; font-size: 1.05em; font-weight: 500; border-radius: 30px; display: inline-flex; align-items: center; gap: 10px; letter-spacing: 0.3px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease; border: none; background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);">
+                <i class="fas fa-download" style="font-size: 0.9em;"></i> Descargar Currículum
+              </a>
+              <small style="color: rgba(255,255,255,0.8); text-align: center; font-size: 0.8em; line-height: 1.4; letter-spacing: 0.2px; font-weight: 300;">Descarga una copia actualizada de mi currículum vitae.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Hero Section -->
+
+{% endblock %}
