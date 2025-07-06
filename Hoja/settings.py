@@ -3,11 +3,23 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Clave secreta (en producción, mejor usar variable de entorno)
 SECRET_KEY = 'django-insecure-cty$!4kv1f!j9c_korxl_^fymsrdw22q3+-4wuhq7(=metcry_'
 
+# Desactivar debug en producción
 DEBUG = False
 
-ALLOWED_HOSTS = ['tu-dominio.render.com', 'localhost', '127.0.0.1']
+# Hosts permitidos para evitar error 400 Bad Request
+ALLOWED_HOSTS = [
+    'tu-dominio.render.com',  # Cambia esto por tu dominio real en Render
+    'localhost',
+    '127.0.0.1',
+]
+
+# Para Django 4.x y HTTPS en dominios personalizados, evita errores CSRF
+CSRF_TRUSTED_ORIGINS = [
+    'https://tu-dominio.render.com',  # Debe incluir https:// y tu dominio
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
