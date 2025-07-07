@@ -29,6 +29,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
   <style>
+    /* Preloader estilos */
+    #preloader {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: white url('{% static "plantilla/assets/img/spinner.gif" %}') no-repeat center center;
+      z-index: 9999;
+    }
+
     body {
       padding-top: 70px; /* Para evitar que el contenido quede oculto bajo el header fijo */
     }
@@ -51,6 +59,9 @@
 </head>
 
 <body>
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
   <header id="header" class="header fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid container-xl">
@@ -130,9 +141,6 @@
     <i class="bi bi-arrow-up-short"></i>
   </a>
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
   <!-- Vendor JS Files -->
   <script src="{% static 'plantilla/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'plantilla/assets/vendor/php-email-form/validate.js' %}"></script>
@@ -144,5 +152,15 @@
 
   <!-- Main JS File -->
   <script src="{% static 'plantilla/assets/js/main.js' %}"></script>
+
+  <!-- Preloader JS -->
+  <script>
+    window.addEventListener('load', function() {
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        preloader.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
