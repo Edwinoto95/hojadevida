@@ -10,27 +10,28 @@
   <link href="{% static 'plantilla/assets/img/favicon.png' %}" rel="icon" />
   <link href="{% static 'plantilla/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
 
-  <!-- Fonts -->
+  <!-- Fonts y CSS -->
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Montserrat&family=Raleway&display=swap" rel="stylesheet" />
 
-  <!-- Vendor CSS Files -->
+  <!-- Bootstrap CSS -->
   <link href="{% static 'plantilla/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
   <link href="{% static 'plantilla/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
+  <!-- Otros CSS -->
   <link href="{% static 'plantilla/assets/vendor/aos/aos.css' %}" rel="stylesheet" />
   <link href="{% static 'plantilla/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" />
   <link href="{% static 'plantilla/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
 
-  <!-- Main CSS File -->
+  <!-- Main CSS -->
   <link href="{% static 'plantilla/assets/css/main.css' %}" rel="stylesheet" />
 
-  <!-- Font Awesome CDN para íconos -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
   <style>
     body {
-      padding-top: 70px; /* Para evitar que el contenido quede oculto bajo el header fijo */
+      padding-top: 70px; /* espacio para header fijo */
     }
     #header.header {
       background-color: #2c3e50;
@@ -56,85 +57,72 @@
 </head>
 
 <body>
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-      <a href="{% url 'vida:inicio' %}" class="logo d-flex align-items-center text-white text-decoration-none">
-<img src="{% static 'plantilla/images/logo1.png' %}" alt="Logo EO" style="max-height: 70px; width: auto; display: block;">
-</a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul class="list-unstyled d-flex mb-0">
-          <li><a href="{% url 'vida:inicio' %}" class="active">Inicio</a></li>
-          <li><a href="{% url 'vida:proyectos' %}">Proyectos</a></li>
-          <li><a href="{% url 'vida:experiencia' %}">Experiencia</a></li>
-          <li><a href="{% url 'vida:educacion' %}">Educación</a></li>
-          <li><a href="{% url 'vida:habilidades' %}">Habilidades</a></li>
-          <li><a href="{% url 'vida:tecnologias' %}">Tecnologías</a></li>
-          
-       
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-    </div>
+  <header id="header" class="header fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid container-xl">
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'vida:inicio' %}">
+          <img src="{% static 'plantilla/images/logo1.png' %}" alt="Logo EO" style="max-height: 70px; width: auto;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="{% url 'vida:inicio' %}">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'vida:proyectos' %}">Proyectos</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'vida:experiencia' %}">Experiencia</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'vida:educacion' %}">Educación</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'vida:habilidades' %}">Habilidades</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'vida:tecnologias' %}">Tecnologías</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </header>
 
   {% block content %}{% endblock %}
 
- <footer id="footer" class="footer bg-light text-dark pt-5">
-  <div class="container">
-    <div class="row gy-4">
-
-      <!-- Sobre ti -->
-      <div class="col-lg-4 col-md-12 footer-about">
-        <a href="{% url 'vida:inicio' %}" class="logo d-flex align-items-center text-decoration-none mb-3">
-          <span class="sitename fs-4 fw-bold text-primary">EDOT</span>
-        </a>
-        <p>Ingeniero en Sistemas de Información con experiencia en desarrollo web, especializado en soluciones modernas para la gestión empresarial y municipal.</p>
-        <div class="social-links d-flex gap-3 mt-3">
-    
+  <footer id="footer" class="footer bg-light text-dark pt-5">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-12 footer-about">
+          <a href="{% url 'vida:inicio' %}" class="logo d-flex align-items-center text-decoration-none mb-3">
+            <span class="sitename fs-4 fw-bold text-primary">EDOT</span>
+          </a>
+          <p>Ingeniero en Sistemas de Información con experiencia en desarrollo web, especializado en soluciones modernas para la gestión empresarial y municipal.</p>
+        </div>
+        <div class="col-lg-2 col-6 footer-links">
+          <h5 class="mb-3">Enlaces</h5>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-dark text-decoration-none">Inicio</a></li>
+            <li><a href="#" class="text-dark text-decoration-none">Sobre mí</a></li>
+            <li><a href="{% url 'vida:proyectos' %}" class="text-dark text-decoration-none">Proyectos</a></li>
+            <li><a href="#" class="text-dark text-decoration-none">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-6 footer-links">
+          <h5 class="mb-3">Servicios</h5>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-dark text-decoration-none">Desarrollo Web</a></li>
+            <li><a href="#" class="text-dark text-decoration-none">Consultoría IT</a></li>
+            <li><a href="#" class="text-dark text-decoration-none">Soporte Técnico</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-12 footer-contact">
+          <h5 class="mb-3">Contacto</h5>
+          <p><i class="bi bi-geo-alt-fill me-2"></i>Latacunga, Cotopaxi, Ecuador</p>
+          <p><i class="bi bi-telephone-fill me-2"></i>+593 984214393</p>
+          <p><i class="bi bi-envelope-fill me-2"></i>edwin.oto8669@utc.edu.ec</p>
+          <p><i class="bi bi-linkedin me-2"></i><a href="https://www.linkedin.com/in/edwin-danilo-oto-toapanta-415947372" target="_blank" class="text-dark text-decoration-none">LinkedIn</a></p>
         </div>
       </div>
-
-      <!-- Enlaces útiles -->
-      <div class="col-lg-2 col-6 footer-links">
-        <h5 class="mb-3">Enlaces</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-dark text-decoration-none">Inicio</a></li>
-          <li><a href="#" class="text-dark text-decoration-none">Sobre mí</a></li>
-          <li><a href="{% url 'vida:proyectos' %}" class="text-dark text-decoration-none">Proyectos</a></li>
-          <li><a href="#" class="text-dark text-decoration-none">Contacto</a></li>
-        </ul>
+      <hr class="my-4" />
+      <div class="text-center pb-3">
+        <small>Desarrollador: Edwin Danilo Oto Toapanta.</small>
       </div>
-
-      <!-- Servicios -->
-      <div class="col-lg-3 col-6 footer-links">
-        <h5 class="mb-3">Servicios</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-dark text-decoration-none">Desarrollo Web</a></li>
-          <li><a href="#" class="text-dark text-decoration-none">Consultoría IT</a></li>
-          <li><a href="#" class="text-dark text-decoration-none">Soporte Técnico</a></li>
-          
-        </ul>
-      </div>
-
-      <!-- Contacto -->
-      <div class="col-lg-3 col-md-12 footer-contact">
-        <h5 class="mb-3">Contacto</h5>
-        <p><i class="bi bi-geo-alt-fill me-2"></i>Latacunga, Cotopaxi, Ecuador</p>
-        <p><i class="bi bi-telephone-fill me-2"></i>+593 984214393</p>
-        <p><i class="bi bi-envelope-fill me-2"></i>edwin.oto8669@utc.edu.ec</p>
-        <p><i class="bi bi-linkedin me-2"></i><a href="https://www.linkedin.com/in/edwin-danilo-oto-toapanta-415947372" target="_blank" class="text-dark text-decoration-none">LinkedIn</a></p>
-      </div>
-
     </div>
-
-    <hr class="my-4">
-
-    <div class="text-center pb-3">
-      <small>Desarrolador: Edwin Danilo Oto Toapanta.</small>
-    </div>
-  </div>
-</footer>
-
+  </footer>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
