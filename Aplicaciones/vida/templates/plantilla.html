@@ -2,165 +2,614 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>{% block title %}Mi sitio{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi sitio{% endblock %}</title>
 
-  <!-- Favicons -->
-  <link href="{% static 'plantilla/assets/img/favicon.png' %}" rel="icon" />
-  <link href="{% static 'plantilla/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
+    <!-- Favicons -->
+    <link href="{% static 'plantilla/assets/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'plantilla/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect" />
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Montserrat&family=Raleway&display=swap" rel="stylesheet" />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@300;400;500;700&family=Raleway:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'plantilla/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
-  <link href="{% static 'plantilla/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
-  <link href="{% static 'plantilla/assets/vendor/aos/aos.css' %}" rel="stylesheet" />
-  <link href="{% static 'plantilla/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" />
-  <link href="{% static 'plantilla/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="{% static 'plantilla/assets/css/main.css' %}" rel="stylesheet" />
+    <!-- Vendor CSS Files (fallback to CDN if local files fail) -->
+    <link href="{% static 'plantilla/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" onerror="this.remove()">
+    <link href="{% static 'plantilla/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" onerror="this.remove()">
+    <link href="{% static 'plantilla/assets/vendor/aos/aos.css' %}" rel="stylesheet" onerror="this.remove()">
+    <link href="{% static 'plantilla/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" onerror="this.remove()">
+    <link href="{% static 'plantilla/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" onerror="this.remove()">
 
-  <!-- Font Awesome CDN para íconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Main CSS File -->
+    <link href="{% static 'plantilla/assets/css/main.css' %}" rel="stylesheet" onerror="this.remove()">
 
-  <style>
-    /* Preloader estilos */
-    #preloader {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: white url('{% static "plantilla/assets/img/spinner.gif" %}') no-repeat center center;
-      z-index: 9999;
-    }
+    <style>
+        /* Preloader styles */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #fff;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    body {
-      padding-top: 70px; /* Para evitar que el contenido quede oculto bajo el header fijo */
-    }
-    #header.header {
-      background-color: #2c3e50;
-      z-index: 1030;
-    }
-    #navmenu ul li a {
-      color: white;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    #navmenu ul li a:hover,
-    #navmenu ul li a.active {
-      color: #ffc107;
-    }
-  </style>
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
 
-  {% block extra_head %}{% endblock %}
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Body and header styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 80px; /* Space for fixed header */
+        }
+
+        /* Header styles */
+        .header {
+            background-color: #2c3e50 !important;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .header.scrolled {
+            background-color: rgba(44, 62, 80, 0.95) !important;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+        }
+
+        .navbar-brand img {
+            max-height: 60px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Navigation styles */
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin: 0 8px;
+            padding: 10px 18px !important;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 15px;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: #ffc107 !important;
+            background-color: rgba(255, 193, 7, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.2);
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 5px;
+            left: 50%;
+            background-color: #ffc107;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::after,
+        .navbar-nav .nav-link.active::after {
+            width: 80%;
+            left: 10%;
+        }
+
+        /* Mobile menu styles */
+        .navbar-toggler {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler:hover {
+            border-color: #ffc107;
+            background-color: rgba(255, 193, 7, 0.1);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Footer styles */
+        .footer {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-top: 1px solid #dee2e6;
+            margin-top: 50px;
+        }
+
+        .footer h5 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer a {
+            color: #495057 !important;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #3498db !important;
+        }
+
+        .footer .sitename {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* Scroll to top button */
+        #scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        #scroll-top:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        #scroll-top.show {
+            display: flex !important;
+        }
+
+        /* Responsive improvements */
+        @media (max-width: 991px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .navbar-brand img {
+                max-height: 50px;
+            }
+            
+            .navbar-collapse {
+                background-color: rgba(44, 62, 80, 0.95);
+                margin-top: 10px;
+                border-radius: 10px;
+                padding: 15px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            }
+            
+            .navbar-nav .nav-link {
+                margin: 8px 0;
+                text-align: center;
+                padding: 12px 20px !important;
+                border-radius: 8px;
+                font-size: 16px;
+            }
+            
+            .navbar-nav .nav-link:hover {
+                background-color: rgba(255, 193, 7, 0.15);
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding-top: 65px;
+            }
+            
+            .navbar-brand img {
+                max-height: 45px;
+            }
+            
+            .container-fluid.container-xl {
+                padding: 0 15px;
+            }
+            
+            .footer .row {
+                text-align: center;
+            }
+            
+            .footer .col-lg-4,
+            .footer .col-lg-2,
+            .footer .col-lg-3 {
+                margin-bottom: 30px;
+            }
+            
+            .footer h5 {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            
+            .footer p,
+            .footer a {
+                font-size: 14px;
+            }
+            
+            .social-links {
+                justify-content: center !important;
+            }
+            
+            .social-links a {
+                margin: 0 10px !important;
+            }
+            
+            #scroll-top {
+                width: 40px;
+                height: 40px;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 400px) {
+            .navbar-brand img {
+                max-height: 40px;
+            }
+            
+            .navbar-nav .nav-link {
+                font-size: 15px;
+                padding: 10px 15px !important;
+            }
+            
+            .footer .sitename {
+                font-size: 20px !important;
+            }
+        }
+
+        /* Loading animation for images */
+        img {
+            transition: opacity 0.3s ease;
+        }
+
+        img[data-src] {
+            opacity: 0;
+        }
+
+        img.loaded {
+            opacity: 1;
+        }
+
+        /* Touch device optimizations */
+        .touch-device .navbar-nav .nav-link:hover {
+            transform: none;
+        }
+
+        .touch-device .navbar-nav .nav-link:active {
+            background-color: rgba(255, 193, 7, 0.2);
+            transform: scale(0.98);
+        }
+
+        /* Improved footer for mobile */
+        .footer {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-top: 1px solid #dee2e6;
+            margin-top: 50px;
+        }
+
+        .footer .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .footer .social-links a:hover {
+            background-color: #3498db;
+            color: white !important;
+            transform: translateY(-2px);
+        }
+    </style>
+
+    {% block extra_head %}{% endblock %}
 </head>
 
 <body>
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <header id="header" class="header fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid container-xl">
-        <a class="navbar-brand d-flex align-items-center" href="{% url 'vida:inicio' %}">
-          <img src="{% static 'plantilla/images/logo1.png' %}" alt="Logo EO" style="max-height: 70px; width: auto;">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item"><a class="nav-link active" href="{% url 'vida:inicio' %}">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'vida:proyectos' %}">Proyectos</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'vida:experiencia' %}">Experiencia</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'vida:educacion' %}">Educación</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'vida:habilidades' %}">Habilidades</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'vida:tecnologias' %}">Tecnologías</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  {% block content %}{% endblock %}
-
-  <footer id="footer" class="footer bg-light text-dark pt-5">
-    <div class="container">
-      <div class="row gy-4">
-
-        <div class="col-lg-4 col-md-12 footer-about">
-          <a href="{% url 'vida:inicio' %}" class="logo d-flex align-items-center text-decoration-none mb-3">
-            <span class="sitename fs-4 fw-bold text-primary">EDOT</span>
-          </a>
-          <p>Ingeniero en Sistemas de Información con experiencia en desarrollo web, especializado en soluciones modernas para la gestión empresarial y municipal.</p>
-        </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h5 class="mb-3">Enlaces</h5>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-dark text-decoration-none">Inicio</a></li>
-            <li><a href="#" class="text-dark text-decoration-none">Sobre mí</a></li>
-            <li><a href="{% url 'vida:proyectos' %}" class="text-dark text-decoration-none">Proyectos</a></li>
-            <li><a href="#" class="text-dark text-decoration-none">Contacto</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-3 col-6 footer-links">
-          <h5 class="mb-3">Servicios</h5>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-dark text-decoration-none">Desarrollo Web</a></li>
-            <li><a href="#" class="text-dark text-decoration-none">Consultoría IT</a></li>
-            <li><a href="#" class="text-dark text-decoration-none">Soporte Técnico</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-3 col-md-12 footer-contact">
-          <h5 class="mb-3">Contacto</h5>
-          <p><i class="bi bi-geo-alt-fill me-2"></i>Latacunga, Cotopaxi, Ecuador</p>
-          <p><i class="bi bi-telephone-fill me-2"></i>+593 984214393</p>
-          <p><i class="bi bi-envelope-fill me-2"></i>edwin.oto8669@utc.edu.ec</p>
-          <p><i class="bi bi-linkedin me-2"></i><a href="https://www.linkedin.com/in/edwin-danilo-oto-toapanta-415947372" target="_blank" class="text-dark text-decoration-none">LinkedIn</a></p>
-        </div>
-
-      </div>
-
-      <hr class="my-4">
-
-      <div class="text-center pb-3">
-        <small>Desarrollador: Edwin Danilo Oto Toapanta.</small>
-      </div>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
     </div>
-  </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
-    <i class="bi bi-arrow-up-short"></i>
-  </a>
+    <!-- Header -->
+    <header id="header" class="header fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid container-xl">
+                <a class="navbar-brand d-flex align-items-center" href="{% url 'vida:inicio' %}">
+                    <img src="{% static 'plantilla/images/logo1.png' %}" alt="Logo EO" 
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiByeD0iMTAiIGZpbGw9IiMzNDk4ZGIiLz4KPHR0ZXh0IHg9IjMwIiB5PSI0MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkVEPC90ZXh0Pgo8L3N2Zz4K'">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'inicio' %}active{% endif %}" 
+                               href="{% url 'vida:inicio' %}">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'proyectos' %}active{% endif %}" 
+                               href="{% url 'vida:proyectos' %}">Proyectos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'experiencia' %}active{% endif %}" 
+                               href="{% url 'vida:experiencia' %}">Experiencia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'educacion' %}active{% endif %}" 
+                               href="{% url 'vida:educacion' %}">Educación</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'habilidades' %}active{% endif %}" 
+                               href="{% url 'vida:habilidades' %}">Habilidades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'tecnologias' %}active{% endif %}" 
+                               href="{% url 'vida:tecnologias' %}">Tecnologías</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Vendor JS Files -->
-  <script src="{% static 'plantilla/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'plantilla/assets/vendor/php-email-form/validate.js' %}"></script>
-  <script src="{% static 'plantilla/assets/vendor/aos/aos.js' %}"></script>
-  <script src="{% static 'plantilla/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
-  <script src="{% static 'plantilla/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="{% static 'plantilla/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
-  <script src="{% static 'plantilla/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <!-- Main Content -->
+    <main id="main">
+        {% block content %}{% endblock %}
+    </main>
 
-  <!-- Main JS File -->
-  <script src="{% static 'plantilla/assets/js/main.js' %}"></script>
+    <!-- Footer -->
+    <footer id="footer" class="footer pt-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-12 footer-about">
+                    <a href="{% url 'vida:inicio' %}" class="logo d-flex align-items-center text-decoration-none mb-3">
+                        <span class="sitename fs-4 fw-bold">EDOT</span>
+                    </a>
+                    <p class="mb-3">
+                        Ingeniero en Sistemas de Información con experiencia en desarrollo web, 
+                        especializado en soluciones modernas para la gestión empresarial y municipal.
+                    </p>
+                    <div class="social-links d-flex">
+                        <a href="https://www.linkedin.com/in/edwin-danilo-oto-toapanta-415947372" 
+                           target="_blank" class="me-3 text-decoration-none">
+                            <i class="fab fa-linkedin fs-4"></i>
+                        </a>
+                        <a href="mailto:edwin.oto8669@utc.edu.ec" class="me-3 text-decoration-none">
+                            <i class="fas fa-envelope fs-4"></i>
+                        </a>
+                        <a href="tel:+593984214393" class="text-decoration-none">
+                            <i class="fas fa-phone fs-4"></i>
+                        </a>
+                    </div>
+                </div>
 
-  <!-- Preloader JS -->
-  <script>
-    window.addEventListener('load', function() {
-      const preloader = document.getElementById('preloader');
-      if (preloader) {
-        preloader.style.display = 'none';
-      }
-    });
-  </script>
+                <div class="col-lg-2 col-6 footer-links">
+                    <h5 class="mb-3">Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{% url 'vida:inicio' %}">Inicio</a></li>
+                        <li class="mb-2"><a href="{% url 'vida:proyectos' %}">Proyectos</a></li>
+                        <li class="mb-2"><a href="{% url 'vida:experiencia' %}">Experiencia</a></li>
+                        <li class="mb-2"><a href="{% url 'vida:educacion' %}">Educación</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-6 footer-links">
+                    <h5 class="mb-3">Servicios</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Desarrollo Web</a></li>
+                        <li class="mb-2"><a href="#">Consultoría IT</a></li>
+                        <li class="mb-2"><a href="#">Soporte Técnico</a></li>
+                        <li class="mb-2"><a href="#">Desarrollo de Software</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-12 footer-contact">
+                    <h5 class="mb-3">Contacto</h5>
+                    <div class="mb-2">
+                        <i class="bi bi-geo-alt-fill me-2 text-primary"></i>
+                        <span>Latacunga, Cotopaxi, Ecuador</span>
+                    </div>
+                    <div class="mb-2">
+                        <i class="bi bi-telephone-fill me-2 text-primary"></i>
+                        <a href="tel:+593984214393">+593 984214393</a>
+                    </div>
+                    <div class="mb-2">
+                        <i class="bi bi-envelope-fill me-2 text-primary"></i>
+                        <a href="mailto:edwin.oto8669@utc.edu.ec">edwin.oto8669@utc.edu.ec</a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="text-center pb-3">
+                <small class="text-muted">
+                    © 2024 Edwin Danilo Oto Toapanta. Todos los derechos reservados.
+                </small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll Top Button -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- JavaScript Files -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Vendor JS Files (with CDN fallbacks) -->
+    <script src="{% static 'plantilla/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}" 
+            onerror="console.log('Local Bootstrap failed, using CDN')"></script>
+    <script src="{% static 'plantilla/assets/vendor/aos/aos.js' %}" 
+            onerror="console.log('AOS library not found')"></script>
+    <script src="{% static 'plantilla/assets/vendor/glightbox/js/glightbox.min.js' %}" 
+            onerror="console.log('GLightbox library not found')"></script>
+    <script src="{% static 'plantilla/assets/vendor/swiper/swiper-bundle.min.js' %}" 
+            onerror="console.log('Swiper library not found')"></script>
+
+    <!-- Main JS File -->
+    <script src="{% static 'plantilla/assets/js/main.js' %}" 
+            onerror="console.log('Main JS file not found')"></script>
+
+    <!-- Core JavaScript -->
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 300);
+                }, 500);
+            }
+        });
+
+        // Scroll to top functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollTop = document.getElementById('scroll-top');
+            
+            if (scrollTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 100) {
+                        scrollTop.classList.add('show');
+                    } else {
+                        scrollTop.classList.remove('show');
+                    }
+                });
+
+                scrollTop.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+
+        // Mobile menu close on link click
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 991) {
+                        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                        if (bsCollapse) {
+                            bsCollapse.hide();
+                        }
+                    }
+                });
+            });
+        });
+
+        // Smooth navbar transition on scroll
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up
+                header.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Touch-friendly interactions
+        if ('ontouchstart' in window) {
+            document.body.classList.add('touch-device');
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize AOS if available
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 1000,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+        }
+    </script>
+
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>
